@@ -3,16 +3,31 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+    script(src='/javascripts/main.js')
   body
     #topnav
-      .wrapper
+      .width-wrapper
         ul
           li
-            a Timer
+            a(href="#!/timer") Timer
           li
-            a Stats
+            a(href="#!/stats") Stats
           li
-            a Account
+            a(href="#!/login") Login
+          li
+            a(href="#!/account")
+              span
+                |Username
     #mainwrap
-      .wrapper
-        #content!= body
+      #content
+        #contentpage-timer.content-page
+          .width-wrapper
+            .intro
+              h2 BragTimer
+            #thetimer
+              .clock
+                |00:00.00
+              .hint
+                |Press space bar or enter to start the timer
+        //#content!= body
