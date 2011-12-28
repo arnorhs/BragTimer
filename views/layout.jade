@@ -3,4 +3,16 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body!= body
+  body
+    #topnav
+      .wrapper
+        ul
+          li
+            a Timer
+          li
+            a Stats
+          li
+            a Account
+    #mainwrap
+      .wrapper
+        #content!= body
