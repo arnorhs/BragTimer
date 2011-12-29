@@ -13,18 +13,17 @@ $(function(){
 window.T = (function ($,window,undefined) {
 
     var T = {};
+    function pad(n){
+        return n<10 ? '0'+n : n
+    }
+    function formatDate (d) {
+        if (d.constructor !== Date) {
+            d = new Date(d);
+        }
+        return pad(d.getMinutes()) + ':' + pad(d.getSeconds()) + '.' + pad(Math.floor(d.getMilliseconds()/10));
+    }
 
     T.timer = (function(){
-        var formatDate, pad;
-        function pad(n){
-            return n<10 ? '0'+n : n
-        }
-        function formatDate (d) {
-            if (d.constructor !== Date) {
-                d = new Date(d);
-            }
-            return pad(d.getMinutes()) + ':' + pad(d.getSeconds()) + '.' + pad(Math.floor(d.getMilliseconds()/10));
-        }
         // accepts a callback that will be called with the text formatted string so far
         return function (callback) {
             var timer,
@@ -75,6 +74,24 @@ window.T = (function ($,window,undefined) {
         },
         parseFragment: function (url) {
             return url.split(/#!\//)[1];
+        }
+    };
+
+
+    T.times = {
+        times: [],
+        add: function (time) {
+            this.times.push(time);
+        },
+        remove: function (index) {
+            delete times[index];
+        },
+        display: function () {
+            var $ul = $('<ul></ul>');
+            for (var i = 0; i < this.times.length; i++) {
+                $ul.append($('<li>'+formatDate(this.times[i])+'</li>'));
+            }
+            return $ul;
         }
     };
 

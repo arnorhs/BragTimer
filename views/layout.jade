@@ -19,15 +19,24 @@ html
             a(href="#!/account")
               span
                 |Username
-    #mainwrap
-      #content
-        #contentpage-timer.content-page
-          .width-wrapper
-            .intro
-              h2 BragTimer
-            #thetimer
-              .clock
-                |00:00.00
-              .hint
-                |Press space bar or enter to start the timer
-        //#content!= body
+    #contentpage-stats.content-page
+      .width-wrapper
+        Stats and stuff
+    #contentpage-login.content-page
+      .width-wrapper
+        Login or something
+    #contentpage-account.content-page
+      .width-wrapper
+        Your account
+    #contentpage-timer.content-page
+      .width-wrapper
+        .intro
+          h2
+            span.brag Brag
+            span.timer Timer
+        #thetimer
+          .clock
+            |00:00.00
+          .hint
+            |Press space bar or enter to start the timer
+    //#content!= body
