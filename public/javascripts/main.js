@@ -86,20 +86,28 @@ window.T = (function ($,window,undefined) {
         remove: function (index) {
             delete times[index];
         },
-        display: function () {
-            var $ul = $('<ul></ul>');
+        render: function (callback) {
             for (var i = 0; i < this.times.length; i++) {
-                $ul.append($('<li>'+formatDate(this.times[i])+'</li>'));
+                callback(this.times[i],i);
             }
-            return $ul;
         }
     };
 
+    T.summaryTable = function () {
+        var $tbody = $('#summary_table tbody').empty(),
+            avg = 0, sum = 0, max = 0, min = 9999999999;
+        T.times.render(function(time,i){
+            time = Number(time);
+            sum += time;
+            avg = sum / (i+1);
+            $tbody.prepend('<tr><td class="time">'+formatDate(time)+'</td><td class="average">'+formatDate(avg)+'</td></tr>');
+        });
+    };
+
     T.initTimerControls = function () {
-        var timer = T.timer(function(str){
+        var timer = T.timer(function (str) {
             $('#thetimer .clock').html(str);
         });
-        var times = [];
 
         $(window).keydown(function(e){
             switch (e.keyCode) {
@@ -113,7 +121,8 @@ window.T = (function ($,window,undefined) {
                 case 13:
                 case 32:
                     if (timer.isRunning()) {
-                        var time = timer.stop();
+                        T.times.add(timer.stop());
+                        T.summaryTable();
                     } else {
                         timer.start();
                     }
@@ -128,7 +137,8 @@ window.T = (function ($,window,undefined) {
                 // where's the any key?
                 default:
                     if (timer.isRunning()) {
-                        var time = timer.stop();
+                        T.times.add(timer.stop());
+                        T.summaryTable();
                     }
                     break;
             }

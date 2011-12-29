@@ -172,6 +172,19 @@ a {
   margin-top: 20px;
   color: rgba(0,0,0,0.30);
 }
+#summary_table table {
+  border: 1px solid #fff;
+}
+#summary_table table td,
+#summary_table table th {
+  text-align: left;
+  padding: 4px 8px;
+  border-bottom: 1px solid #fff;
+}
+#summary_table table td.time,
+#summary_table table th.time {
+  font-weight: bold;
+}
 #topnav {
   height: 50px;
   background: rgba(0,0,0,0.20);
