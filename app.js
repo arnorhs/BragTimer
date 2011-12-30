@@ -6,7 +6,8 @@
 var express = require('express')
   , stylus = require('stylus')
   , routes = require('./routes')
-  , everyauth = require('./everyauth')
+  , everyauth = require('everyauth')
+  , bragtimer = require('./bragtimer')
 
 var app = module.exports = express.createServer();
 
@@ -27,6 +28,7 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+  everyauth.debug = true;
 });
 
 app.configure('production', function(){
@@ -34,6 +36,7 @@ app.configure('production', function(){
 });
 
 // every auth routes and helpers
+bragtimer.setupEveryAuth(everyauth);
 everyauth.helpExpress(app);
 
 // Routes
