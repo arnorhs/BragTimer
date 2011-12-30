@@ -6,6 +6,7 @@
 var express = require('express')
   , stylus = require('stylus')
   , routes = require('./routes')
+  , everyauth = require('./everyauth')
 
 var app = module.exports = express.createServer();
 
@@ -19,6 +20,7 @@ app.configure(function(){
     app.use(express.cookieParser());
     app.use(express.session({ secret: 'your secret here' }));
     app.use(stylus.middleware({ src: __dirname + '/public' }));
+    app.use(everyauth.middleware());
     app.use(app.router);
     app.use(express.static(__dirname + '/public'));
 });
@@ -30,6 +32,9 @@ app.configure('development', function(){
 app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
+
+// every auth routes and helpers
+everyauth.helpExpress(app);
 
 // Routes
 
