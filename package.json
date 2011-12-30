@@ -1,6 +1,6 @@
 {
-  "name": "BragTimer",
-  "version": "0.0.1",
+  "name": "bragtimer",
+  "version": "0.0.1-1",
   "private": true,
   "dependencies": {
     "express": "2.5.0",
@@ -8,6 +8,7 @@
     "stylus": ">= 0.0.1"
   },
   "subdomain": "bragtimer",
+  "domains": ["bragtimer.com","www.bragtimer.com"],
   "scripts": {
     "start": "app.js"
   }
