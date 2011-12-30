@@ -62,7 +62,13 @@ a
     color: rgba(0,0,0,0.3)
     
 #summary_table
+  display: none
+  margin-top: 20px
+  &.visible
+    display: block
   table
+    width: 200px
+    margin: 0 auto
     border: 1px solid #FFF
     td, th
       text-align: left

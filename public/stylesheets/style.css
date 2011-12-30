@@ -172,7 +172,16 @@ a {
   margin-top: 20px;
   color: rgba(0,0,0,0.30);
 }
+#summary_table {
+  display: none;
+  margin-top: 20px;
+}
+#summary_table.visible {
+  display: block;
+}
 #summary_table table {
+  width: 200px;
+  margin: 0 auto;
   border: 1px solid #fff;
 }
 #summary_table table td,

@@ -80,6 +80,9 @@ window.T = (function ($,window,undefined) {
 
     T.times = {
         times: [],
+        length: function () {
+            return this.times.length
+        },
         add: function (time) {
             this.times.push(time);
         },
@@ -96,6 +99,7 @@ window.T = (function ($,window,undefined) {
     T.summaryTable = function () {
         var $tbody = $('#summary_table tbody').empty(),
             avg = 0, sum = 0, max = 0, min = 9999999999;
+        $('#summary_table').toggleClass('visible', T.times.length() > 0);
         T.times.render(function(time,i){
             time = Number(time);
             sum += time;
