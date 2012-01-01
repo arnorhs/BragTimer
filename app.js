@@ -9,8 +9,12 @@ var express = require('express')
   , passport = require('passport')
   , LocalAuthStrategy = require('passport-local').Strategy
   , Sequelize = require('sequelize')
+  , sequelize = null
   , configs = { development: require('./config.development.js'), production: require('./config.production.js') }
-  , config = null
+  // database objects
+  , User
+
+console.log(configs);
 
 
 var app = module.exports = express.createServer();
@@ -32,7 +36,6 @@ passport.use(new LocalAuthStrategy(
 ));
 passport.serializeUser(function(user, done) {
     console.log('serialize user',user);
-
     done(null, user.id);
 });
 
@@ -62,15 +65,38 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
-  config = configs.development;
+  console.log('connecting to development db');
+  connect_sequelize(configs.development);
 });
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
-  config = configs.production;
+  console.log('connecting to production db');
+  connect_sequelize(configs.production);
 });
 
-// every auth routes and helpers
+
+// Sequelize
+function connect_sequelize (config) {
+  console.log(config);
+  sequelize = new Sequelize(config.mysql_database,config.mysql_user, config.mysql_password,{
+    host: config.mysql_host
+  });
+
+  User = sequelize.define('User', {
+    username: Sequelize.STRING,
+    password: Sequelize.STRING
+  });
+
+  User.sync().on('success',function(){
+    console.log('success creating table User');
+  }).on('failure',function(error){
+    console.log(error);
+    console.log('failure creating table User');
+  });;
+
+}
+
 
 // Routes
 app.get('/', routes.index);
