@@ -8,7 +8,6 @@ var express = require('express')
   , routes = require('./routes')
   , passport = require('passport')
   , LocalAuthStrategy = require('passport-local').Strategy
-  , bragtimer = require('./bragtimer')
 
 var app = module.exports = express.createServer();
 
