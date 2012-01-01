@@ -6,19 +6,7 @@ html
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
     script(src='/javascripts/main.js')
   body
-    #topnav
-      .width-wrapper
-        ul
-          li
-            a(href="#!/timer") Timer
-          li
-            a(href="#!/stats") Stats
-          li
-            a(href="#!/login") Login
-          li
-            a(href="#!/account")
-              span
-                |Username
+    include topnav
     #contentpage-stats.content-page
       .width-wrapper
         Stats and stuff
@@ -46,5 +34,3 @@ html
                 th Time
                 th Average
             tbody
-
-    //#content!= body
