@@ -8,6 +8,10 @@ var express = require('express')
   , routes = require('./routes')
   , passport = require('passport')
   , LocalAuthStrategy = require('passport-local').Strategy
+  , Sequelize = require('sequelize')
+  , configs = { development: require('./config.development.js'), production: require('./config.production.js') }
+  , config = null
+
 
 var app = module.exports = express.createServer();
 
@@ -58,10 +62,12 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+  config = configs.development;
 });
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
+  config = configs.production;
 });
 
 // every auth routes and helpers
