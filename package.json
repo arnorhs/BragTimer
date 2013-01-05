@@ -5,11 +5,9 @@
   "dependencies": {
     "express": "2.5.0",
     "jade": ">= 0.0.1",
-    "stylus": ">= 0.0.1"
-  },
-  "subdomain": "bragtimer",
-  "domains": ["bragtimer.com","www.bragtimer.com"],
-  "scripts": {
-    "start": "app.js"
+    "stylus": ">= 0.0.1",
+    "mkdirp": ">= 0.0.1",
+    "mysql": ">= 0.0.1",
+    "sequelize": ">= 1.4.0"
   }
 }
